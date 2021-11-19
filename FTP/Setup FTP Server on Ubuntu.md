@@ -4,6 +4,8 @@
 
 By default, it runs on port **21**
 
+In this walkthrough, we will be installing FTPS which runs on port **990**
+
 1. Update System Packages
 
     `sudo apt update`
@@ -354,7 +356,7 @@ drwxr-xr-x 4 root root     4096 Nov  8 15:23 ..
 root@practice:/home/user#
 ```
 
-I then referred to the manpage, [man 5 vsftpd.conf](https://linux.die.net/man/5/vsftpd.conf) to make changes on different parameters on the configuration file. Here are some of the configuration parameters i set.
+I then referred to the manpage, [man 5 vsftpd.conf](https://linux.die.net/man/5/vsftpd.conf) to see what parameters can be included in the configuration file. Here are some of the configuration parameters i included.
 
 ```bash
 anonymous_enable=NO
@@ -386,15 +388,27 @@ Restart the daemon using the following command to load the configuration changes
 
 `systemctl restart vsftpd`
 
+# Testing Connection with FileZilla
+
+Launch FileZilla and click on the Site Manager icon. Then, click the New Site button in the prompted window to enter the Ubuntu FTP server details.
+
 ![image](https://user-images.githubusercontent.com/58165365/141836559-e441eb50-5e46-45aa-8811-76d9838512c4.png)
+
+Fill in all the required columns with your newly created Ubuntu FTP server information. Since we configured it to use TLS, we may also choose the Use explicit FTP over TLS option. The final configuration should look like this:
 
 ![image](https://user-images.githubusercontent.com/58165365/141836981-f968a824-7073-4055-8108-b77ad7afeffa.png)
 
+Once ready, click Connect, and a screen asking to enter the FTP user’s password will appear. After that, hit OK.
+
 ![image](https://user-images.githubusercontent.com/58165365/141837205-d880178e-7da0-4691-bd27-e36038fe3ccc.png)
+
+Finally, you will need to verify the SSL certificate of your FTP server on Ubuntu VPS. After confirming, the root directory with the test file should now appear on your screen.
 
 ![image](https://user-images.githubusercontent.com/58165365/141837450-e65b285c-03ae-47c7-829a-e3d2a9d711b5.png)
 
 ![image](https://user-images.githubusercontent.com/58165365/141837991-5cf973f3-d3ea-4e19-860f-8f60501ad1d6.png)
+
+That’s all! Now, you can perform various files transfers from your computer to the Ubuntu FTP server and vice versa.
 
 ![image](https://user-images.githubusercontent.com/58165365/141839223-85f35b5b-6d24-4523-9fe9-c97920801cb0.png)
 
